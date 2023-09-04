@@ -657,6 +657,7 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 	hostStatsProvider := stats.NewHostStatsProvider(kubecontainer.RealOS{}, func(podUID types.UID) string {
 		return getEtcHostsPath(klet.getPodDir(podUID))
 	})
+	klog.InfoS("Check stats provider to use", "useLegacyCadvisorStats", kubeDeps.useLegacyCadvisorStats)
 	if kubeDeps.useLegacyCadvisorStats {
 		klet.StatsProvider = stats.NewCadvisorStatsProvider(
 			klet.cadvisor,
